@@ -21,7 +21,7 @@ public class PatientJpaRepository implements IPatientJpaGateway {
     public PatientDto createPatient(PatientDto patientDto) {
         Patient patient = new Patient(patientDto.name(), patientDto.cpf());
         PatientEntity saved = patientRepository.save(patient.createPatientEntity());
-        return new PatientDto(saved.getId(), saved.getName(), saved.getCpf(), saved.getAddress(), saved.getMedications());
+        return new PatientDto(saved.getId(), saved.getName(), saved.getCpf());
     }
 
     @Transactional
@@ -29,8 +29,7 @@ public class PatientJpaRepository implements IPatientJpaGateway {
         PatientEntity patientEntity = patientRepository.findById(patientId)
                 .orElseThrow(() -> new RuntimeException("Patient not found"));
 
-        return new PatientDto(patientEntity.getId(), patientEntity.getName(), patientEntity
-                .getCpf(), patientEntity.getAddress(), patientEntity.getMedications());
+        return new PatientDto(patientEntity.getId(), patientEntity.getName(), patientEntity.getCpf());
     }
 
     @Transactional
@@ -41,7 +40,7 @@ public class PatientJpaRepository implements IPatientJpaGateway {
         patientEntity.setCpf(patientDto.cpf());
 
         PatientEntity saved = patientRepository.save(patientEntity);
-        return new PatientDto(saved.getId(), saved.getName(), saved.getCpf(), saved.getAddress(), saved.getMedications());
+        return new PatientDto(saved.getId(), saved.getName(), saved.getCpf());
     }
     @Transactional
     public void deletePatient(Long patientId) {

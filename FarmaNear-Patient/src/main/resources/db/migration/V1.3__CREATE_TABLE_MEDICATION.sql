@@ -7,6 +7,6 @@ CREATE TABLE IF NOT EXISTS MEDICATIONS (
     start_date DATE,
     end_date DATE,
     notes VARCHAR(255),
-    patient_id INTEGER,
-    CONSTRAINT fk_medication_patient FOREIGN KEY (patient_id) REFERENCES PATIENTS (id) ON DELETE CASCADE
+    id_patient INTEGER,
+    CONSTRAINT fk_medication_patient FOREIGN KEY (id_patient) REFERENCES PATIENTS(id) ON DELETE CASCADE
 );

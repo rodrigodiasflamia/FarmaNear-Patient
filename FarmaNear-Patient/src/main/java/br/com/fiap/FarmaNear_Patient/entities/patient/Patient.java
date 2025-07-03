@@ -11,8 +11,6 @@ public class Patient implements PatientEntityInterface{
     private Long id;
     private String name;
     private String cpf;
-    private Address address;
-    private Set<Medication> medications;
 
     public Patient() { }
 
@@ -21,19 +19,10 @@ public class Patient implements PatientEntityInterface{
         this.cpf = cpf;
     }
 
-    public Patient(String name, String cpf, Address address, Set<Medication> medications) {
-        this.name = name;
-        this.cpf = cpf;
-        this.address = address;
-        this.medications = medications;
-    }
-
-    public Patient(Long id, String name, String cpf, Address address, Set<Medication> medications) {
+    public Patient(Long id, String name, String cpf) {
         this.id = id;
         this.name = name;
         this.cpf = cpf;
-        this.address = address;
-        this.medications = medications;
     }
 
     public Long getId() {
@@ -46,14 +35,6 @@ public class Patient implements PatientEntityInterface{
 
     public String getCpf() {
         return cpf;
-    }
-
-    public Address getAddress() {
-        return address;
-    }
-
-    public Set<Medication> getMedications() {
-        return medications;
     }
 
     @Override

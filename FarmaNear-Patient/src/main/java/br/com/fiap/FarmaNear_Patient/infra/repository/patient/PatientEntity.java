@@ -4,7 +4,8 @@ import br.com.fiap.FarmaNear_Patient.infra.repository.address.AddressEntity;
 import br.com.fiap.FarmaNear_Patient.infra.repository.medication.MedicationEntity;
 import jakarta.persistence.*;
 
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "patients")
@@ -16,12 +17,11 @@ public class PatientEntity {
     private String name;
     private String cpf;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "address_id")
+    @OneToOne(mappedBy = "patient", cascade = CascadeType.ALL, orphanRemoval = true)
     private AddressEntity address;
 
     @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<MedicationEntity> medications;
+    private List<MedicationEntity> medications = new ArrayList<>();
 
     public PatientEntity() { }
 
@@ -30,19 +30,10 @@ public class PatientEntity {
         this.cpf = cpf;
     }
 
-    public PatientEntity(String name, String cpf, AddressEntity address, Set<MedicationEntity> medications) {
-        this.name = name;
-        this.cpf = cpf;
-        this.address = address;
-        this.medications = medications;
-    }
-
-    public PatientEntity(Long id, String name, String cpf, AddressEntity address, Set<MedicationEntity> medications) {
+    public PatientEntity(Long id, String name, String cpf) {
         this.id = id;
         this.name = name;
         this.cpf = cpf;
-        this.address = address;
-        this.medications = medications;
     }
 
     public Long getId() {
@@ -77,11 +68,11 @@ public class PatientEntity {
         this.address = address;
     }
 
-    public Set<MedicationEntity> getMedications() {
+    public List<MedicationEntity> getMedications() {
         return medications;
     }
 
-    public void setMedications(Set<MedicationEntity> medications) {
+    public void setMedications(List<MedicationEntity> medications) {
         this.medications = medications;
     }
 }

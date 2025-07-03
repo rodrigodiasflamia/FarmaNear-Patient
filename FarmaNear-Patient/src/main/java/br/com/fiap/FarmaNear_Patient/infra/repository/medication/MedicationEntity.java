@@ -21,12 +21,12 @@ public class MedicationEntity {
     private String notes;
 
     @ManyToOne
-    @JoinColumn(name = "patient_id")
+    @JoinColumn(name = "id_patient")
     private PatientEntity patient;
 
     public MedicationEntity() { }
 
-    public MedicationEntity(String name, String dosage, String administrationRoute, String frequency, LocalDate startDate, LocalDate endDate, String notes) {
+    public MedicationEntity(String name, String dosage, String administrationRoute, String frequency, LocalDate startDate, LocalDate endDate, String notes, PatientEntity patient) {
         this.name = name;
         this.dosage = dosage;
         this.administrationRoute = administrationRoute;
@@ -34,17 +34,7 @@ public class MedicationEntity {
         this.startDate = startDate;
         this.endDate = endDate;
         this.notes = notes;
-    }
-
-    public MedicationEntity(Long id, String name, String dosage, String administrationRoute, String frequency, LocalDate startDate, LocalDate endDate, String notes) {
-        this.id = id;
-        this.name = name;
-        this.dosage = dosage;
-        this.administrationRoute = administrationRoute;
-        this.frequency = frequency;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.notes = notes;
+        this.patient = patient;
     }
 
     public Long getId() {

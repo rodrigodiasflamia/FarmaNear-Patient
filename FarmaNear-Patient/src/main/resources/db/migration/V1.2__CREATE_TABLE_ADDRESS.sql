@@ -8,5 +8,7 @@ CREATE TABLE IF NOT EXISTS ADDRESSES (
     state VARCHAR(255),
     zip_code VARCHAR(255),
     mobile_phone VARCHAR(255),
-    email VARCHAR(255)
+    email VARCHAR(255),
+    id_patient INTEGER UNIQUE,
+    CONSTRAINT fk_address_patient FOREIGN KEY (id_patient) REFERENCES PATIENTS (id) ON DELETE CASCADE
 );

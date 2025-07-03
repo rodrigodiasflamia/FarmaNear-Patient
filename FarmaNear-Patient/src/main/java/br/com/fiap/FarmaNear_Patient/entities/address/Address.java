@@ -1,6 +1,8 @@
 package br.com.fiap.FarmaNear_Patient.entities.address;
 
+import br.com.fiap.FarmaNear_Patient.entities.patient.Patient;
 import br.com.fiap.FarmaNear_Patient.infra.repository.address.AddressEntity;
+import br.com.fiap.FarmaNear_Patient.infra.repository.patient.PatientEntity;
 
 public class Address implements AddressEntityInterface{
 
@@ -14,10 +16,11 @@ public class Address implements AddressEntityInterface{
     private String zipCode;
     private String mobilePhone;
     private String email;
+    private Patient patient;
 
     public Address() { }
 
-    public Address(String street, String number, String neighborhood, String complement, String city, String state, String zipCode, String mobilePhone, String email) {
+    public Address(String street, String number, String neighborhood, String complement, String city, String state, String zipCode, String mobilePhone, String email, Patient patient) {
         this.street = street;
         this.number = number;
         this.neighborhood = neighborhood;
@@ -27,19 +30,7 @@ public class Address implements AddressEntityInterface{
         this.zipCode = zipCode;
         this.mobilePhone = mobilePhone;
         this.email = email;
-    }
-
-    public Address(Long id, String street, String number, String neighborhood, String complement, String city, String state, String zipCode, String mobilePhone, String email) {
-        this.id = id;
-        this.street = street;
-        this.number = number;
-        this.neighborhood = neighborhood;
-        this.complement = complement;
-        this.city = city;
-        this.state = state;
-        this.zipCode = zipCode;
-        this.mobilePhone = mobilePhone;
-        this.email = email;
+        this.patient = patient;
     }
 
     public Long getId() {
@@ -82,8 +73,13 @@ public class Address implements AddressEntityInterface{
         return email;
     }
 
+    public Patient getPatient() {
+        return patient;
+    }
+
     @Override
     public AddressEntity createAddressEntity(){
-        return new AddressEntity(street, number, neighborhood, complement, city, state, zipCode, mobilePhone, email);
+        PatientEntity patientEntity = new PatientEntity(patient.getId(), patient.getName(), patient.getCpf());
+        return new AddressEntity(street, number, neighborhood, complement, city, state, zipCode, mobilePhone, email, patientEntity);
     }
 }

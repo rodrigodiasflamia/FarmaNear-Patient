@@ -1,5 +1,6 @@
 package br.com.fiap.FarmaNear_Patient.infra.repository.address;
 
+import br.com.fiap.FarmaNear_Patient.infra.repository.patient.PatientEntity;
 import jakarta.persistence.*;
 
 @Entity
@@ -19,9 +20,13 @@ public class AddressEntity {
     private String mobilePhone;
     private String email;
 
+    @OneToOne
+    @JoinColumn(name = "id_patient", unique = true)
+    private PatientEntity patient;
+
     public AddressEntity() { }
 
-    public AddressEntity(String street, String number, String neighborhood, String complement, String city, String state, String zipCode, String mobilePhone, String email) {
+    public AddressEntity(String street, String number, String neighborhood, String complement, String city, String state, String zipCode, String mobilePhone, String email, PatientEntity patient) {
         this.street = street;
         this.number = number;
         this.neighborhood = neighborhood;
@@ -31,19 +36,7 @@ public class AddressEntity {
         this.zipCode = zipCode;
         this.mobilePhone = mobilePhone;
         this.email = email;
-    }
-
-    public AddressEntity(Long id, String street, String number, String neighborhood, String complement, String city, String state, String zipCode, String mobilePhone, String email) {
-        this.id = id;
-        this.street = street;
-        this.number = number;
-        this.neighborhood = neighborhood;
-        this.complement = complement;
-        this.city = city;
-        this.state = state;
-        this.zipCode = zipCode;
-        this.mobilePhone = mobilePhone;
-        this.email = email;
+        this.patient = patient;
     }
 
     public Long getId() {
@@ -124,5 +117,13 @@ public class AddressEntity {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public PatientEntity getPatient() {
+        return patient;
+    }
+
+    public void setPatient(PatientEntity patient) {
+        this.patient = patient;
     }
 }
