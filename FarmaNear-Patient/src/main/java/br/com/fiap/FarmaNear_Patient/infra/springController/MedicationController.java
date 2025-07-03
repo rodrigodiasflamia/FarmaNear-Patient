@@ -11,6 +11,8 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/medication")
 public class MedicationController {
@@ -49,6 +51,17 @@ public class MedicationController {
     @GetMapping(value = "/read/{medicationId}")
     public ResponseEntity<MedicationDto> readMedication(@PathVariable Long medicationId) {
         MedicationDto medication = readMedicationController.readMedication(medicationId);
+        return ResponseEntity.ok().body(medication);
+    }
+
+    @Operation(summary = "Busca o cadastro dos medicamentos do paciente",
+            description = "Retorna o cadastro dos medicamentos com base no id do paciente")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Cadastro do medicamento encontrado com sucesso!")
+    })
+    @GetMapping(value = "/patient/read/{patientId}")
+    public ResponseEntity<List<MedicationDto>> readMedicationPatient(@PathVariable Long patientId) {
+        List<MedicationDto> medication = readMedicationController.readMedicationPatient(patientId);
         return ResponseEntity.ok().body(medication);
     }
 

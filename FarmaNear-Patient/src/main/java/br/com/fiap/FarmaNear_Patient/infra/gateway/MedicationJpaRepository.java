@@ -11,6 +11,10 @@ import br.com.fiap.FarmaNear_Patient.interfaces.IMedicationJpaGateway;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class MedicationJpaRepository implements IMedicationJpaGateway {
 
@@ -42,6 +46,22 @@ public class MedicationJpaRepository implements IMedicationJpaGateway {
                 .orElseThrow(() -> new RuntimeException("Medication not found"));
         return new MedicationDto(medicationEntity.getId(), medicationEntity.getName(), medicationEntity.getDosage(), medicationEntity.getAdministrationRoute(), medicationEntity
                 .getFrequency(), medicationEntity.getStartDate(), medicationEntity.getEndDate(), medicationEntity.getNotes(), medicationEntity.getPatient().getId());
+    }
+
+    @Transactional
+    public List<MedicationDto> readMedicationPatient(Long patientId){
+        List<MedicationEntity> medicationEntities = medicationRepository.readMedicationPatient(patientId);
+        if(medicationEntities.isEmpty()) {
+            throw new RuntimeException("Medication not found");
+        }
+
+        List<MedicationDto> dtos = new ArrayList<>();
+        medicationEntities.forEach(dto -> {
+            MedicationDto medicationDto = new MedicationDto(dto.getId(), dto.getName(), dto.getDosage(), dto.getAdministrationRoute(),
+                    dto.getFrequency(), dto.getStartDate(), dto.getEndDate(), dto.getNotes(), dto.getPatient().getId());
+            dtos.add(medicationDto);
+        });
+        return dtos;
     }
 
     @Transactional

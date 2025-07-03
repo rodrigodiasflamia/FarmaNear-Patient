@@ -4,6 +4,8 @@ import br.com.fiap.FarmaNear_Patient.controller.medication.dto.MedicationDto;
 import br.com.fiap.FarmaNear_Patient.interfaces.IMedicationJpaGateway;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ReadMedicationUseCase {
 
@@ -15,5 +17,9 @@ public class ReadMedicationUseCase {
 
     public MedicationDto readMedication(Long medicationId) {
         return medicationJpaGateway.readMedication(medicationId);
+    }
+
+    public List<MedicationDto> readMedicationPatient(Long patientId) {
+        return medicationJpaGateway.readMedicationPatient(patientId);
     }
 }
