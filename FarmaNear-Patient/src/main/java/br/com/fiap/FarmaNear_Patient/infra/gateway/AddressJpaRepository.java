@@ -11,6 +11,8 @@ import br.com.fiap.FarmaNear_Patient.interfaces.IAddressJpaGateway;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class AddressJpaRepository implements IAddressJpaGateway {
 
@@ -43,6 +45,18 @@ public class AddressJpaRepository implements IAddressJpaGateway {
 
         return new AddressDto(addressEntity.getId(), addressEntity.getStreet(), addressEntity.getNumber(), addressEntity.getNeighborhood(), addressEntity.getComplement(),
                 addressEntity.getCity(), addressEntity.getState(), addressEntity.getZipCode(), addressEntity.getMobilePhone(), addressEntity.getEmail(), addressEntity.getPatient().getId());
+    }
+
+    @Transactional
+    public AddressDto readAddressPatient(Long patientId) {
+        Optional<AddressEntity> addressEntity = addressRepository.readAddressPatient(patientId);
+        if(addressEntity.isEmpty()){
+            throw new RuntimeException("Address not found");
+        }
+
+        return new AddressDto(addressEntity.get().getId(), addressEntity.get().getStreet(), addressEntity.get().getNumber(), addressEntity.get().getNeighborhood(),
+                addressEntity.get().getComplement(), addressEntity.get().getCity(), addressEntity.get().getState(), addressEntity.get().getZipCode(),
+                addressEntity.get().getMobilePhone(), addressEntity.get().getEmail(), addressEntity.get().getPatient().getId());
     }
 
     @Transactional

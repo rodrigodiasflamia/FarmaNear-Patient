@@ -52,6 +52,17 @@ public class AddressController {
         return ResponseEntity.ok().body(addressDto);
     }
 
+    @Operation(summary = "Busca o cadastro do endereço do paciente",
+            description = "Retorna o cadastro do endereço com base no id do paciente")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Cadastro do endereço do paciente encontrado com sucesso!")
+    })
+    @GetMapping(value = "/patient/read/{patientId}")
+    public ResponseEntity<AddressDto> readAddressPatient(@PathVariable Long patientId){
+        AddressDto addressDto = readAddressController.readAddressPatient(patientId);
+        return ResponseEntity.ok().body(addressDto);
+    }
+
     @Operation(summary = "Atualiza o cadastro do endereço",
             description = "Retorna o cadastro do endereço atualizado")
     @ApiResponses(value = {

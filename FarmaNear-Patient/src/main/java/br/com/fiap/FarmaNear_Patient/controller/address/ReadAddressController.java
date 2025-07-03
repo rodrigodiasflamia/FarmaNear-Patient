@@ -16,4 +16,8 @@ public class ReadAddressController {
     public AddressDto readAddress(Long addressId) {
         return readAddresstUseCase.readAddress(addressId);
     }
+
+    public AddressDto readAddressPatient(Long patientId) {
+        return readAddresstUseCase.readAddressPatient(patientId);
+    }
 }

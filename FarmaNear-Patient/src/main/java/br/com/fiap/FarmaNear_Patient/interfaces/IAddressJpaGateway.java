@@ -8,6 +8,8 @@ public interface IAddressJpaGateway {
 
     AddressDto readAddress(Long addressId);
 
+    AddressDto readAddressPatient(Long patientId);
+
     AddressDto updateAddress(AddressDto addressDto);
 
     void deleteAddress(Long addressId);
