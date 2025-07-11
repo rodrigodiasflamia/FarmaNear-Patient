@@ -15,6 +15,7 @@ import br.com.fiap.FarmaNear_Patient.usecases.patient.CreatePatientUseCase;
 import br.com.fiap.FarmaNear_Patient.usecases.patient.DeletePatientUseCase;
 import br.com.fiap.FarmaNear_Patient.usecases.patient.ReadPatientUseCase;
 import br.com.fiap.FarmaNear_Patient.usecases.patient.UpdatePatientUseCase;
+import br.com.fiap.FarmaNear_Patient.usecases.security.TokenUseCase;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -79,5 +80,10 @@ public class UseCaseConfig {
     @Bean
     DeleteMedicationUseCase deleteMedicationUseCase(IMedicationJpaGateway medicationJpaGateway) {
         return new DeleteMedicationUseCase(medicationJpaGateway);
+    }
+
+    @Bean
+    TokenUseCase tokenUseCase() {
+        return new TokenUseCase();
     }
 }
