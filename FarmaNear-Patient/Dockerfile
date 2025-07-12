@@ -6,7 +6,7 @@ ENV DB_URL=${DB_URL}
 ENV DB_USER=${DB_USER}
 ENV DB_PASSWORD=${DB_PASSWORD}
 
-COPY target/inventory_management-0.0.1-SNAPSHOT.jar app.jar
+COPY target/FarmaNear-Patient-0.0.1-SNAPSHOT.jar app.jar
 
 EXPOSE 8080
 

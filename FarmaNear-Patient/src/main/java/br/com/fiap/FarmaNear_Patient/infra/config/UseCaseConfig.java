@@ -3,6 +3,7 @@ package br.com.fiap.FarmaNear_Patient.infra.config;
 import br.com.fiap.FarmaNear_Patient.interfaces.IAddressJpaGateway;
 import br.com.fiap.FarmaNear_Patient.interfaces.IMedicationJpaGateway;
 import br.com.fiap.FarmaNear_Patient.interfaces.IPatientJpaGateway;
+import br.com.fiap.FarmaNear_Patient.interfaces.IQueueGateway;
 import br.com.fiap.FarmaNear_Patient.usecases.address.CreateAddresstUseCase;
 import br.com.fiap.FarmaNear_Patient.usecases.address.DeleteAddresstUseCase;
 import br.com.fiap.FarmaNear_Patient.usecases.address.ReadAddresstUseCase;
@@ -43,8 +44,10 @@ public class UseCaseConfig {
     }
 
     @Bean
-    CreateAddresstUseCase createAddresstUseCase(IAddressJpaGateway addressJpaGateway) {
-        return new CreateAddresstUseCase(addressJpaGateway);
+    CreateAddresstUseCase createAddresstUseCase(IAddressJpaGateway addressJpaGateway,
+                                                IPatientJpaGateway patientJpaGateway,
+                                                IQueueGateway queueGateway) {
+        return new CreateAddresstUseCase(addressJpaGateway, patientJpaGateway, queueGateway);
     }
 
     @Bean
@@ -53,8 +56,10 @@ public class UseCaseConfig {
     }
 
     @Bean
-    UpdateAddresstUseCase updateAddresstUseCase(IAddressJpaGateway addressJpaGateway) {
-        return new UpdateAddresstUseCase(addressJpaGateway);
+    UpdateAddresstUseCase updateAddresstUseCase(IAddressJpaGateway addressJpaGateway,
+                                                IPatientJpaGateway patientJpaGateway,
+                                                IQueueGateway queueGateway) {
+        return new UpdateAddresstUseCase(addressJpaGateway, patientJpaGateway, queueGateway);
     }
 
     @Bean
