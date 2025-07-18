@@ -13,7 +13,11 @@ public class ReadPatientController {
         this.readPatientUseCase = readPatientUseCase;
     }
 
-    public PatientDto readPatient(Long patientId) {
-        return readPatientUseCase.readPatient(patientId);
+    public PatientDto readPatientById(Long patientId) {
+        return readPatientUseCase.readPatientById(patientId);
+    }
+
+    public PatientDto readPatientByCpf(String patientCpf) {
+        return readPatientUseCase.readPatientByCpf(patientCpf);
     }
 }

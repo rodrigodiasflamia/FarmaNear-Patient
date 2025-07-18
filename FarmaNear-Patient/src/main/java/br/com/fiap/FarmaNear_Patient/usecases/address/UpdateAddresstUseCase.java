@@ -25,7 +25,7 @@ public class UpdateAddresstUseCase {
 
     public AddressDto updateAddress(AddressDto addressDto) {
         AddressDto dto =  addressJpaGateway.updateAddress(addressDto);
-        PatientDto patientDto = patientJpaGateway.readPatient(dto.idPatient());
+        PatientDto patientDto = patientJpaGateway.readPatientById(dto.idPatient());
 
         queueGateway.sendPatientToQueue(new QueuePatientDto(patientDto.cpf(), dto));
         return dto;

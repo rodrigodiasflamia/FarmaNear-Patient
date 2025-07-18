@@ -6,7 +6,9 @@ public interface IPatientJpaGateway {
 
     PatientDto createPatient(PatientDto patientDto);
 
-    PatientDto readPatient(Long patientId);
+    PatientDto readPatientById(Long patientId);
+
+    PatientDto readPatientByCpf(String patientCpf);
 
     PatientDto updatePatient(PatientDto patientDto);
 

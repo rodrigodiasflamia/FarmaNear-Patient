@@ -13,7 +13,11 @@ public class ReadPatientUseCase {
         this.patientJpaGateway = patientJpaGateway;
     }
 
-    public PatientDto readPatient(Long patientId) {
-        return patientJpaGateway.readPatient(patientId);
+    public PatientDto readPatientById(Long patientId) {
+        return patientJpaGateway.readPatientById(patientId);
+    }
+
+    public PatientDto readPatientByCpf(String patientCpf) {
+        return patientJpaGateway.readPatientByCpf(patientCpf);
     }
 }

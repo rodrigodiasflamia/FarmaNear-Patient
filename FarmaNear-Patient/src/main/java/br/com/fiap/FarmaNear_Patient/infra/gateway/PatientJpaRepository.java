@@ -25,8 +25,16 @@ public class PatientJpaRepository implements IPatientJpaGateway {
     }
 
     @Transactional
-    public PatientDto readPatient(Long patientId) {
+    public PatientDto readPatientById(Long patientId) {
         PatientEntity patientEntity = patientRepository.findById(patientId)
+                .orElseThrow(() -> new RuntimeException("Patient not found"));
+
+        return new PatientDto(patientEntity.getId(), patientEntity.getName(), patientEntity.getCpf());
+    }
+
+    @Transactional
+    public PatientDto readPatientByCpf(String patientCpf) {
+        PatientEntity patientEntity = patientRepository.readPatientByCpf(patientCpf)
                 .orElseThrow(() -> new RuntimeException("Patient not found"));
 
         return new PatientDto(patientEntity.getId(), patientEntity.getName(), patientEntity.getCpf());

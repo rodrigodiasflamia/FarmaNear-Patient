@@ -46,9 +46,20 @@ public class PatientController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Cadastro do paciente encontrado com sucesso!")
     })
-    @GetMapping(value="/read/{patientId}")
-    public ResponseEntity<PatientDto> readPatient(@PathVariable Long patientId) {
-        PatientDto patient = readPatientController.readPatient(patientId);
+    @GetMapping(value="/read/id/{patientId}")
+    public ResponseEntity<PatientDto> readPatientById(@PathVariable Long patientId) {
+        PatientDto patient = readPatientController.readPatientById(patientId);
+        return ResponseEntity.ok().body(patient);
+    }
+
+    @Operation(summary = "Busca o cadastro do paciente",
+            description = "Retorna o cadastro do paciente com base no seu cpf")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Cadastro do paciente encontrado com sucesso!")
+    })
+    @GetMapping(value="/read/cpf/{patientCpf}")
+    public ResponseEntity<PatientDto> readPatientByCpf(@PathVariable String patientCpf) {
+        PatientDto patient = readPatientController.readPatientByCpf(patientCpf);
         return ResponseEntity.ok().body(patient);
     }
 
