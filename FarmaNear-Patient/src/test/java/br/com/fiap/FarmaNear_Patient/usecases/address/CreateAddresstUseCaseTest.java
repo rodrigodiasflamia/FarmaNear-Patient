@@ -4,6 +4,7 @@ import br.com.fiap.FarmaNear_Patient.controller.address.dto.AddressDto;
 import br.com.fiap.FarmaNear_Patient.controller.patient.dto.PatientDto;
 import br.com.fiap.FarmaNear_Patient.interfaces.IAddressJpaGateway;
 import br.com.fiap.FarmaNear_Patient.interfaces.IPatientJpaGateway;
+import br.com.fiap.FarmaNear_Patient.interfaces.IQueueGateway;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -20,6 +21,9 @@ public class CreateAddresstUseCaseTest {
 
     @Mock
     private IPatientJpaGateway patientJpaGateway;
+
+    @Mock
+    private IQueueGateway queueGateway;
 
     @InjectMocks
     private CreateAddresstUseCase createAddresstUseCase;
