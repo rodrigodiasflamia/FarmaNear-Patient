@@ -50,6 +50,7 @@ public class PatientJpaRepository implements IPatientJpaGateway {
         PatientEntity saved = patientRepository.save(patientEntity);
         return new PatientDto(saved.getId(), saved.getName(), saved.getCpf());
     }
+
     @Transactional
     public void deletePatient(Long patientId) {
         PatientEntity patientEntity = patientRepository.findById(patientId)
